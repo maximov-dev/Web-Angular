@@ -1,0 +1,17 @@
+<div class="form-inline">
+  <div class="form-group">
+    <input class="form-control" [(ngModel)]="title" placeholder="Заголовок"/>
+    <input class="form-control" class="form-control" [(ngModel)]="descr" placeholder="Описание"/>
+    <button *ngIf="title && descr" class="btn-default form-control" (click)="addItem(title, descr, dateNow, check)">
+      Добавить запись
+    </button>
+  </div>
+</div>
+<div class="notes-table">
+  <div class="note" *ngFor="let item of items">
+    <div class="title">{{item.title}}</div>
+    <div class="descr">{{item.descr}}</div>
+    <div class="date">{{item.date}}</div>
+    <div class="check"><input type="checkbox" (click)="checkBox($event.target)"></div>
+  </div>
+</div>

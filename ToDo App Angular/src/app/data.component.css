@@ -1,0 +1,107 @@
+:host{
+  font-family: "Segoe UI";
+}
+
+table{
+  width: 100%;
+}
+
+.notes-table{
+  display: flex;
+  flex-direction: column;
+  top: 80px;
+  position: relative;
+  width: 100%;
+}
+
+.note{
+  display: flex;
+  position: relative;
+  width: 900px;
+  background-color: #363636;
+  height: 110px;
+  margin: auto;
+  margin-top: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.form-group{
+  position: relative;
+  padding: 10px 0px 1px 0px;
+  width: 100%;
+  background-color: white;
+  min-height: 150px;
+  box-shadow:0 3px 1px -2px rgba(0, 0, 0, .2);;
+}
+
+.form-control{
+  position: relative;
+  display: block;
+  margin: auto;
+  margin-bottom: 15px;
+
+  border: solid;
+  border-width: 1px;
+  border-radius: 5px;
+
+  color: #555555;
+
+  width: 300px;
+  height: 50px;
+  box-shadow: none;
+  outline: none;
+
+  font-weight: 400;
+  text-indent: 18px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-default{
+  border: none;
+  border-radius: 5px;
+  background-color: #7b7b7b;
+  width: 300px;
+  height: 5ы0px;
+}
+
+.title, .descr{
+  word-break: break-word;
+}
+
+.title{
+  width: 200px;
+  margin-left: 5%;
+}
+
+.descr{
+  width: 400px;
+  margin-left: 15%;
+}
+
+.date{
+  width: 200px;
+  margin-left: 20%;
+}
+
+.check{
+  float: right;
+  right: 0;
+  width: 250px;
+  padding: 0 0 0 100px;
+  opacity: 0.1;
+}
+
+.check:hover{
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.2);
+  opacity: 1;
+}
+
+.title, .descr, .date, .check{
+  display: flex;
+  color: white;
+  align-items: center;
+}
+
+

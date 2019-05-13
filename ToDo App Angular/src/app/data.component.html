@@ -1,17 +1,29 @@
-<div class="form-inline">
+<form [formGroup]="addDataForm" novalidate>
   <div class="form-group">
-    <input class="form-control" [(ngModel)]="title" placeholder="Заголовок"/>
-    <input class="form-control" class="form-control" [(ngModel)]="descr" placeholder="Описание"/>
-    <button *ngIf="title && descr" class="btn-default form-control" (click)="addItem(title, descr, dateNow, check)">
-      Добавить запись
+    <input class="form-control" name="title" formControlName="title" placeholder="Заголовок"/>
+    <div class="alert alert-danger"
+         *ngIf="addDataForm.controls['title'].invalid && addDataForm.controls['title'].touched">
+      Название здачи должно быть больше 5 символов
+    </div>
+    <input class="form-control" name="desc" formControlName="desc" placeholder="Описание"/>
+    <div class="alert alert-danger"
+         *ngIf="addDataForm.controls['desc'].invalid && addDataForm.controls['desc'].touched">
+      Введите описание задачи
+    </div>
+    <button [disabled]="addDataForm.invalid" class="btn btn-default" (click)="addItem(addDataForm.value['title'], addDataForm.value['desc'], dateNow, check)">
+      Отправить
     </button>
   </div>
-</div>
+</form>
+
 <div class="notes-table">
-  <div class="note" *ngFor="let item of items">
+  <div class="note" *ngFor="let item of items" [ngClass]="{complete: item['check']}">
     <div class="title">{{item.title}}</div>
     <div class="descr">{{item.descr}}</div>
-    <div class="date">{{item.date}}</div>
-    <div class="check"><input type="checkbox" (click)="checkBox($event.target)"></div>
+    <div class="date">{{dateNow | date:'yyyy-MM-dd'}}</div>
+    <div class="check" click>
+      <input type="checkbox" (click)="checkBoxToggle(item)">
+    </div>
+    <div class="trash" (click)="deleteItem(item)"></div>
   </div>
 </div>

@@ -2,8 +2,8 @@
   font-family: "Segoe UI";
 }
 
-table{
-  width: 100%;
+input[type=checkbox] {
+  cursor: pointer;
 }
 
 .notes-table{
@@ -28,7 +28,7 @@ table{
 
 .form-group{
   position: relative;
-  padding: 10px 0px 1px 0px;
+  padding: 10px 0px 10px 0px;
   width: 100%;
   background-color: white;
   min-height: 150px;
@@ -58,11 +58,13 @@ table{
 }
 
 .btn-default{
+  display: block;
+  margin: auto;
   border: none;
   border-radius: 5px;
   background-color: #7b7b7b;
   width: 300px;
-  height: 5ы0px;
+  height: 50px;
 }
 
 .title, .descr{
@@ -87,21 +89,37 @@ table{
 .check{
   float: right;
   right: 0;
-  width: 250px;
-  padding: 0 0 0 100px;
+  padding: 0 20px 0 20px;
   opacity: 0.1;
 }
 
 .check:hover{
-  border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.2);
   opacity: 1;
 }
 
-.title, .descr, .date, .check{
+.title, .descr, .date, .check, .trash {
   display: flex;
   color: white;
   align-items: center;
+}
+
+.complete{
+  text-decoration: line-through;
+  background-color: gray;
+}
+
+.trash{
+  padding: 0 20px 0 20px;
+  height: 100%;
+  background: no-repeat center url(https://img.icons8.com/ios-glyphs/30/000000/trash.png);
+  opacity: 0.3;
+  cursor: pointer;
+}
+
+.trash:hover{
+  background-color: rgba(255, 255, 255, 0.2);
+  opacity: 1;
 }
 
 

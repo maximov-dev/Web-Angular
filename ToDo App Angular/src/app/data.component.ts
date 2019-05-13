@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {template} from '@angular/core/src/render3';
-import { Note } from './note';
-import { DataService } from './data.service';
+import {Note} from './note';
+import {DataService} from './data.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'data-comp',
@@ -10,23 +11,31 @@ import { DataService } from './data.service';
 })
 
 export class DataComponent implements OnInit {
-  title: string;
-  descr: string;
-  date = new Date();
-  dateNow = this.date.getDate() + '.' + this.date.getMonth() + '.' + this.date.getFullYear();
+  dateNow = String(new Date());
   check = false;
   items: Note[] = [];
-  constructor(private dataService: DataService) { }
+  addDataForm: FormGroup;
+  constructor(private dataService: DataService) {
+    this.addDataForm = new FormGroup({
+      title: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      desc: new FormControl('', Validators.required)
+    });
+  }
 
-  checkBox(elm) {
-    console.log(elm.parentElement.parentElement);
-    elm.parentElement.parentElement.outerHTML='';
+  checkBoxToggle(item) {
+    item['check'] = !item['check'];
+  }
+
+  deleteItem(item) {
+    const index: number = this.items.indexOf(item);
+    if (index !== -1) {
+      this.items.splice(index, 1);
+    }
   }
 
   addItem(title: string, descr: string, date: string, check: boolean) {
-    this.title = '';
-    this.descr = '';
     this.dataService.addData(title, descr, this.dateNow, check);
+    this.addDataForm.reset();
   }
 
   ngOnInit(): void {

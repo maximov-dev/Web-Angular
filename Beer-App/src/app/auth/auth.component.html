@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+</head>
+<body>
+<header>
+  <form [formGroup]="addUserForm" novalidate>
+    <div class="form-group">
+      <input class="form-control" name="title" formControlName="userName" placeholder="Имя пользователя"/>
+      <input class="form-control" name="title" formControlName="userPassword" placeholder="Пароль"/>
+      <button id="btnBasic" (click)="checkAuthFields()">Push</button>
+      <div class="alert alert-danger"
+           *ngIf="addUserForm.controls['userName'].invalid && addUserForm.controls['userName'].touched">
+        Неправильно введено имя пользователя
+      </div>
+      <div class="alert alert-danger"
+           *ngIf="addUserForm.controls['userPassword'].invalid && addUserForm.controls['userPassword'].touched">
+        Неправильно введен пароль
+      </div>
+    </div>
+  </form>
+</header>
+</body>
+</html>

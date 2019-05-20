@@ -1,0 +1,33 @@
+<aside>
+  <button class="btn btn-light asideBtn" (click)="sortByName()">Сортировка по имени</button>
+  <button class="btn btn-light asideBtn" (click)="sortByABV()">Сортировка по количеству спирта</button>
+  <button class="btn btn-light asideBtn" (click)="modalToggle()">Показать отмеченные</button>
+</aside>
+<div id="modal" *ngIf="modalVisibility" [style.display]="modalVisibility">
+  <div id="exitModal" (click)="modalToggle()"></div>
+  <div *ngFor="let item of dataList">
+    <div class="itemBeerModal" *ngIf="item.checked">
+        <div class="name">{{item.name}}</div>
+        <div class="imgItem"><img src="{{item.image_url}}"></div>
+        <div class="descr">{{item.description}}</div>
+        <div class="abv">Количество спирта: {{item.abv}}%
+          <input class="checkBox" type="checkbox" [checked]="item.checked"  (click)="checkBoxToggle(item)">
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="mainList">
+  <div class="itemBeer" *ngFor="let item of dataList">
+    <div class="name">{{item.name}}</div>
+    <div class="imgItem"><img src="{{item.image_url}}"></div>
+    <div class="descr">{{item.description}}</div>
+    <div class="abv">Количество спирта: {{item.abv}}%
+      <input class="checkBox" type="checkbox" [checked]="item.checked" (click)="checkBoxToggle(item)">
+    </div>
+  </div>
+</div>
+<my-pagination>
+</my-pagination>
+
+

@@ -17,7 +17,7 @@ export class AuthComponent {
     });
   }
 
-  checkAuthFields() {
+  checkAuthFields(): void {
     if (this.addUserForm.controls['userName'].invalid && this.addUserForm.controls['userPassword']){
       alert('Ошибка');
     } else {

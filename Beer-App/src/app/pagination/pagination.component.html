@@ -3,17 +3,17 @@
   </div>
   <div class="numbers">
     <button class="link">
-      <div *ngIf="page!=1" (click)="showNumbersOfPages((page)-1)">&lt; Previous</div>
+      <div *ngIf="getCurrentPage()!=1" (click)="setPrevPage()">&lt; Previous</div>
     </button>
 
     <button class="btn btn-secondary"
       *ngFor="let pageNum of showNumbersOfPages()"
-      (click)="showNumbersOfPages(pageNum)">
-      <div *ngIf="pageNum===(page)" [ngStyle]="{'font-size':'23px', 'color':'black'}">{{ pageNum }}</div>
-      <div *ngIf="pageNum!=(page)">{{ pageNum }}</div>
+      (click)="showNumbersOfPages(pageNum)"
+            (click)="setPageOnDataService()">
+      <div [ngClass]="pageNum===getCurrentPage() ? {selectedPageInPag:true} : {selectedPageInPag:false}">{{ pageNum }}</div>
     </button>
     <button class="link">
-      <div *ngIf="page >= 1 && page!=30" (click)="showNumbersOfPages((page)+1)">Next ></div>
+      <div *ngIf="showNextPageBtn()" (click)="setNextPage()">Next ></div>
     </button>
   </div>
 </div>

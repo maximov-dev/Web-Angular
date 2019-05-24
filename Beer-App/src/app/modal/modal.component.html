@@ -1,0 +1,14 @@
+<div id="modal" *ngIf="modalVisibility">
+  <div id="exitModal" (click)="modalToggle()"></div>
+  <div *ngFor="let item of getData()">
+    <div class="itemBeerModal" *ngIf="item.checked">
+      <div class="name">{{item.name}}</div>
+      <div class="imgItem"><img src="{{item.image_url}}"></div>
+      <div class="descr">{{item.description}}</div>
+      <div class="abv">Количество спирта: {{item.abv}}%
+        <input class="checkBox" type="checkbox" [checked]="item.checked"  (click)="checkBoxToggle(item)">
+      </div>
+    </div>
+  </div>
+
+</div>

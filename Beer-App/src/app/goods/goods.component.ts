@@ -1,44 +1,55 @@
 import {Component, OnInit, Input, OnDestroy} from '@angular/core';
-import { Note } from '../Note';
-import { DataService} from '../services/data.service';
-import { Subscription } from 'rxjs';
+import {DataService} from '../services/data.service';
+import {Subject, Subscription} from 'rxjs';
+import {ComponentsDataService} from '../services/components-data.service';
 
 @Component({
   selector: 'goods-comp',
   templateUrl: './goods.component.html',
   styleUrls: ['./goods.component.css'],
-  providers: [DataService]
+  providers: [DataService, ComponentsDataService]
 })
 export class GoodsComponent implements OnInit, OnDestroy {
-  note: Note[] = [];
   page: number;
   dataList;
-  modalVisibility: boolean = false;
   subscription: Subscription;
+  modalVisibility: boolean;
 
-  constructor(private http: DataService) {
+  constructor(private http: DataService, private componentDS: ComponentsDataService) {
   }
 
   ngOnInit(): void {
-    this.subscription = this.http.getData().subscribe(data => {
+    this.subscription = this.http.data$.subscribe(data => {
       this.dataList = data;
-      this.dataList.map((item) => {
+      this.dataList.forEach((item) => {
         item.checked = false;
       });
     });
+    this.componentDS.setData(this.dataList);
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  sortByABV() {
-    this.dataList.sort((elmA, elmB) => {
-    return +elmA['abv'] - +elmB['abv'];
-  });
+  modalToggle(): void {
+    this.modalVisibility = !this.modalVisibility;
   }
 
-  sortByName() {
+  checkBoxToggle(item): void {
+    console.log(item['checked']);
+    item['checked'] = !item['checked'];
+    this.componentDS.setData(this.dataList);
+    this.componentDS.getData();
+  }
+
+  sortByABV(): void {
+    this.dataList.sort((elmA, elmB) => {
+      return +elmA['abv'] - +elmB['abv'];
+    });
+  }
+
+  sortByName(): void {
     return this.dataList.sort((elmA, elmB) => {
       const titleA = elmA['name'].toLowerCase();
       const titleB = elmB['name'].toLowerCase();
@@ -50,14 +61,6 @@ export class GoodsComponent implements OnInit, OnDestroy {
       }
       return 0;
     });
-  }
-
-  modalToggle(): void {
-    this.modalVisibility = !this.modalVisibility;
-  }
-
-  checkBoxToggle(item): void {
-    item['checked'] = !item['checked'];
   }
 
 }

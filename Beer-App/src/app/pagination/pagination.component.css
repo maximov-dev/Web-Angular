@@ -41,3 +41,8 @@ button {
 @extend . link-disabled;
   color: lightgrey;
 }
+
+.selectedPageInPag{
+  font-size: 23px;
+  color: black;
+}

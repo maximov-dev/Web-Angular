@@ -7,25 +7,28 @@ import {ComponentsDataService} from '../services/components-data.service';
   selector: 'goods-comp',
   templateUrl: './goods.component.html',
   styleUrls: ['./goods.component.css'],
-  providers: [DataService, ComponentsDataService]
+  providers: [DataService]
 })
 export class GoodsComponent implements OnInit, OnDestroy {
+  sideMenuVisibility;
   page: number;
   dataList;
   subscription: Subscription;
-  modalVisibility: boolean;
+  modalVisibility;
 
   constructor(private http: DataService, private componentDS: ComponentsDataService) {
   }
 
   ngOnInit(): void {
+    this.componentDS.subject.subscribe(toggle => this.sideMenuVisibility = toggle);
+
+    this.componentDS.dataComp$.subscribe(data => this.dataList = data);
     this.subscription = this.http.data$.subscribe(data => {
       this.dataList = data;
       this.dataList.forEach((item) => {
         item.checked = false;
       });
     });
-    this.componentDS.setData(this.dataList);
   }
 
   ngOnDestroy(): void {
@@ -40,7 +43,6 @@ export class GoodsComponent implements OnInit, OnDestroy {
     console.log(item['checked']);
     item['checked'] = !item['checked'];
     this.componentDS.setData(this.dataList);
-    this.componentDS.getData();
   }
 
   sortByABV(): void {

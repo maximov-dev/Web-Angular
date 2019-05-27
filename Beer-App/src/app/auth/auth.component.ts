@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {FormControl, Validators, FormGroup} from '@angular/forms';
-import set = Reflect.set;
+import {ComponentsDataService} from '../services/components-data.service';
+import {DataService} from '../services/data.service';
 
 @Component({
   selector: 'auth-comp',
@@ -9,12 +10,18 @@ import set = Reflect.set;
 })
 export class AuthComponent {
   addUserForm: FormGroup;
+  sideMenuVisibility=true;
 
-  constructor() {
+  constructor(private ComponentDS: ComponentsDataService) {
     this.addUserForm = new FormGroup({
       userName: new FormControl('', Validators.required),
       userPassword: new FormControl('', [Validators.required, Validators.minLength(8)])
     });
+  }
+
+  sideMenuToggle(): void {
+    console.log('ok');
+    this.ComponentDS.ToggleVisibility();
   }
 
   checkAuthFields(): void {

@@ -1,9 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ComponentsDataService {
   dataComp$ = new Subject();
+  subject = new Subject();
+  sideMenuVisibility;
   dataList;
 
   setData(dataList): void {
@@ -12,12 +17,11 @@ export class ComponentsDataService {
 
   getData() {
     this.dataComp$.subscribe(data => this.dataList = data);
-    console.log(this.dataList);
   }
 
-  setStatusToggle(item) {
-    console.log(item['checked']);
-    item['checked'] = !item['checked'];
+  ToggleVisibility() {
+    this.sideMenuVisibility = !this.sideMenuVisibility;
+    this.subject.next(this.sideMenuVisibility);
   }
 
 }

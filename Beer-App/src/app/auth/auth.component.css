@@ -23,6 +23,28 @@ header{
   to   { opacity: 1; }
 }
 
+.sideMenuToggle{
+  border: none;
+  float: right;
+  right: 0;
+}
+
+.forms{
+  display: inline-block;
+  position: relative;
+}
+
+.forms, .sideMenuToggle{
+  height: 100%;
+}
+
+img{
+  background-size: 55px 55px;
+  position: relative;
+  width: 55px;
+  height: 55px;
+}
+
 #btnBasic{
   position: relative;
   height: 50px;

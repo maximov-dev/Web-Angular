@@ -6,21 +6,31 @@
 </head>
 <body>
 <header>
-  <form [formGroup]="addUserForm" novalidate>
-    <div class="form-group">
-      <input class="form-control" name="title" formControlName="userName" placeholder="Имя пользователя"/>
-      <input class="form-control" name="title" formControlName="userPassword" placeholder="Пароль"/>
-      <button id="btnBasic" (click)="checkAuthFields()">Push</button>
-      <div class="alert alert-danger"
-           *ngIf="addUserForm.controls['userName'].invalid && addUserForm.controls['userName'].touched">
-        Неправильно введено имя пользователя
+  <button class="sideMenuToggle"><img src="https://image.flaticon.com/icons/svg/1665/1665625.svg"
+                                      (click)="sideMenuToggle()"></button>
+  <div class="forms">
+    <form [formGroup]="addUserForm" novalidate>
+      <div class="form-group">
+        <input class="form-control" name="title" formControlName="userName" placeholder="Имя пользователя"/>
+        <input class="form-control" name="title" formControlName="userPassword" placeholder="Пароль"/>
+        <button id="btnBasic" (click)="checkAuthFields()">Push</button>
+        <div class="alert alert-danger"
+             *ngIf="addUserForm.controls['userName'].invalid && addUserForm.controls['userName'].touched">
+          <button type="button" class="close" aria-label="Close" (click)="addUserForm.controls['userName'].reset()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          Неправильно введено имя пользователя
+        </div>
+        <div class="alert alert-danger"
+             *ngIf="addUserForm.controls['userPassword'].invalid && addUserForm.controls['userPassword'].touched">
+          <button type="button" class="close" aria-label="Close" (click)="addUserForm.controls['userPassword'].reset()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          Неправильно введен пароль
+        </div>
       </div>
-      <div class="alert alert-danger"
-           *ngIf="addUserForm.controls['userPassword'].invalid && addUserForm.controls['userPassword'].touched">
-        Неправильно введен пароль
-      </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </header>
 </body>
 </html>

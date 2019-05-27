@@ -8,7 +8,6 @@ import {DataService} from '../services/data.service';
   selector: 'modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css'],
-  providers: [ComponentsDataService]
 })
 
 export class ModalComponent implements OnInit, OnDestroy {
@@ -22,9 +21,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.subscription = this.componentDS.dataComp$.subscribe(data => {
-
       this.dataList = data;
     });
   }
@@ -35,6 +32,8 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   getData() {
     // TODO get all checked objects
+    console.log(this.dataList)
+    return this.dataList;
   }
 
   modalToggle(): void {
@@ -43,7 +42,8 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   checkBoxToggle(item): void {
-    //item['checked'] = !item['checked'];
+    item['checked'] = !item['checked'];
+    this.componentDS.setData(this.dataList);
   }
 
 }

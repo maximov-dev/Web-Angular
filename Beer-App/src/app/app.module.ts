@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {PaginationComponent} from './pagination/pagination.component';
 import {NotFoundComponent} from './not-found.component';
 import {ModalComponent} from './modal/modal.component';
+import {ComponentsDataService} from './services/components-data.service';
 
 const appRoutes: Routes = [
   { path: '', component: GoodsComponent},
@@ -28,7 +29,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [ComponentsDataService],
   bootstrap: [AppComponent]
 })
 

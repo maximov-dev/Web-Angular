@@ -1,8 +1,15 @@
-<aside>
-  <button class="btn btn-light asideBtn" (click)="sortByName()">Сортировка по имени</button>
-  <button class="btn btn-light asideBtn" (click)="sortByABV()">Сортировка по количеству спирта</button>
-  <button class="btn btn-light asideBtn" (click)="modalToggle()">Показать отмеченные</button>
+<aside *ngIf="sideMenuVisibility">
+  <div class="containerAsideBtn">
+    <button class="btn btn-light asideBtn" (click)="sortByName()">Сортировка по имени</button>
+    <button class="btn btn-light asideBtn" (click)="sortByABV()">Сортировка по количеству спирта</button>
+    <button class="btn btn-light asideBtn" (click)="modalToggle()">Показать отмеченные</button>
+  </div>
 </aside>
+<div class="d-flex justify-content-center" *ngIf="!dataList" [ngStyle]="{'margin-top':'65px'}">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
 <div class="mainList">
   <div class="itemBeer" *ngFor="let item of dataList">
     <div class="name">{{item.name}}</div>

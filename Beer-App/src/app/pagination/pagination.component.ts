@@ -67,7 +67,6 @@ export class PaginationComponent implements OnInit {
 
   showNumbersOfPages(page = this.page) {
     this.setCurrentPage(page);
-    //this.router.navigate(['id', this.id], { skipLocationChange: false}) ////////////
 
     if (page === 1 || page <= 6) {
       return this.createNumbersInPag(1, 10);

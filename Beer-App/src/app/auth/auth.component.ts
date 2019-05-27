@@ -19,10 +19,6 @@ export class AuthComponent{
     });
   }
 
-  // ngOnInit() {
-  //   this.ComponentDS.sideMenu$.subscribe(data => this.sideMenuVisibility = data);
-  // }
-
   sideMenuToggle(): void {
     this.ComponentDS.ToggleVisibility();
   }

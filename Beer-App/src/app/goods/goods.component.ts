@@ -40,7 +40,6 @@ export class GoodsComponent implements OnInit, OnDestroy {
   }
 
   sideMenuToggle(): void {
-    console.log('ok')
     this.componentDS.ToggleVisibility();
   }
 

@@ -28,6 +28,11 @@ header{
   border: none;
   float: right;
   right: 0;
+  opacity: 1;
+}
+
+.sideMenuToggle:hover{
+  opacity: 0.9;
 }
 
 .alert{

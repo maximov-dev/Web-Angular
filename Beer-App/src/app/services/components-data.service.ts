@@ -8,7 +8,7 @@ import {BehaviorSubject} from 'rxjs';
 export class ComponentsDataService {
   dataComp$ = new Subject();
   subject = new Subject();
-  sideMenuVisibility;
+  sideMenuVisibility = false;
   dataList;
 
   setData(dataList): void {

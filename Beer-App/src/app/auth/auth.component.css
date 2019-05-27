@@ -15,6 +15,7 @@ header{
 }
 
 .alert, .alert-danger{
+  margin-top: 15px;
   animation: fadein 2s;
 }
 
@@ -29,9 +30,8 @@ header{
   right: 0;
 }
 
-.forms{
-  display: inline-block;
-  position: relative;
+.alert{
+  margin-bottom: -7px;
 }
 
 .forms, .sideMenuToggle{

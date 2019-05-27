@@ -39,6 +39,11 @@ export class GoodsComponent implements OnInit, OnDestroy {
     this.modalVisibility = !this.modalVisibility;
   }
 
+  sideMenuToggle(): void {
+    console.log('ok')
+    this.componentDS.ToggleVisibility();
+  }
+
   checkBoxToggle(item): void {
     console.log(item['checked']);
     item['checked'] = !item['checked'];

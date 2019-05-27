@@ -1,4 +1,4 @@
-<aside *ngIf="sideMenuVisibility">
+<aside *ngIf="sideMenuVisibility" (click)="sideMenuToggle()">
   <div class="containerAsideBtn">
     <button class="btn btn-light asideBtn" (click)="sortByName()">Сортировка по имени</button>
     <button class="btn btn-light asideBtn" (click)="sortByABV()">Сортировка по количеству спирта</button>

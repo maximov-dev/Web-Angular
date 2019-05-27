@@ -31,8 +31,6 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   getData() {
-    // TODO get all checked objects
-    console.log(this.dataList)
     return this.dataList;
   }
 

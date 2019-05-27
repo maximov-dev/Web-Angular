@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {FormControl, Validators, FormGroup} from '@angular/forms';
 import {ComponentsDataService} from '../services/components-data.service';
 import {DataService} from '../services/data.service';
@@ -8,9 +8,9 @@ import {DataService} from '../services/data.service';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent {
+export class AuthComponent{
   addUserForm: FormGroup;
-  sideMenuVisibility=true;
+  sideMenuVisibility;
 
   constructor(private ComponentDS: ComponentsDataService) {
     this.addUserForm = new FormGroup({
@@ -19,8 +19,11 @@ export class AuthComponent {
     });
   }
 
+  // ngOnInit() {
+  //   this.ComponentDS.sideMenu$.subscribe(data => this.sideMenuVisibility = data);
+  // }
+
   sideMenuToggle(): void {
-    console.log('ok');
     this.ComponentDS.ToggleVisibility();
   }
 

@@ -20,7 +20,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.queryParams.pipe(takeUntil(this.componentDestroyed$)).subscribe(params => {
 
-      if (params !== undefined && params['id'] < 30) {
+      if (params['id'] >= 1 && params['id'] <= 30) {
         this.page = +params['id'];
       } else {
         this.page = 1;
@@ -38,13 +38,18 @@ export class PaginationComponent implements OnInit, OnDestroy {
     this.componentDestroyed$.complete();
   }
 
+  onIdChange(page) {
+    window.history.replaceState({}, '',`/home?id=${page}`);
+  }
+
   showNextPageBtn(): boolean {
-    if (this.page >= 1 && this.page !== 30) {
+    if (this.page >= 1 && this.page < 30) {
       return true;
     }
   }
 
   setCurrentPage(page: number): void {
+    this.onIdChange(this.page);
     this.page = page;
   }
 
@@ -54,6 +59,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
 
   setNextPage(): void {
     this.page++;
+    this.onIdChange(this.page);
     this.showNumbersOfPages();
     this.setPageOnDataService();
   }

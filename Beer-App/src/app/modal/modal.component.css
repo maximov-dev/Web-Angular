@@ -28,7 +28,7 @@
 }
 
 .headerModal{
-  position: fixed;
+  position: relative;
   height: 55px;
   width: 100%;
   box-shadow: 0px 10px 13px 1px rgba(0,0,0,0.01);

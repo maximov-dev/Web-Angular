@@ -1,8 +1,7 @@
 <div class="modalWrapper" *ngIf="modalVisibility">
 </div>
 <div id="modal" *ngIf="modalVisibility">
-  <div class="headerModal">
-    <div id="exitModal" (click)="modalToggle()"></div>
+  <div class="headerModal"><div id="exitModal" (click)="modalToggle()"></div></div>
   <div *ngFor="let item of getData()">
     <div class="itemBeerModal" *ngIf="item['checked']">
       <div class="name">{{item.name}}</div>
@@ -12,6 +11,5 @@
         <input class="checkBox" type="checkbox" [checked]="item.checked"  (click)="checkBoxToggle(item)">
       </div>
     </div>
-  </div>
   </div>
 </div>

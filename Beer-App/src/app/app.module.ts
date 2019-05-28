@@ -13,8 +13,8 @@ import {ModalComponent} from './modal/modal.component';
 import {ComponentsDataService} from './services/components-data.service';
 
 const appRoutes: Routes = [
-  { path: '', component: GoodsComponent},
   { path: 'home', component: GoodsComponent},
+  { path: '', redirectTo: '/home?id=1', pathMatch:'full'},
   { path: '**', component: NotFoundComponent}
 ];
 

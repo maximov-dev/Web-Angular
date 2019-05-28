@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {ActivatedRoute} from '@angular/router';
 import {ComponentsDataService} from '../services/components-data.service';
-import { Router} from '@angular/router';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'my-pagination',
@@ -10,17 +11,15 @@ import { Router} from '@angular/router';
   styleUrls: ['./pagination.component.css'],
   providers: [ComponentsDataService]
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnInit, OnDestroy {
   page: number;
-  id: number;
+  componentDestroyed$ = new Subject();
 
-  constructor(private route: ActivatedRoute, private http: DataService, private router: Router) {
-
-  }
+  constructor(private route: ActivatedRoute, private http: DataService) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      console.log(params);
+    this.route.queryParams.pipe(takeUntil(this.componentDestroyed$)).subscribe(params => {
+
       if (params !== undefined && params['id'] < 30) {
         this.page = +params['id'];
       } else {
@@ -32,6 +31,11 @@ export class PaginationComponent implements OnInit {
     });
 
     this.setPageOnDataService();
+  }
+
+  ngOnDestroy(): void {
+    this.componentDestroyed$.next();
+    this.componentDestroyed$.complete();
   }
 
   showNextPageBtn(): boolean {

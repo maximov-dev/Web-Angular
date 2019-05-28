@@ -2,6 +2,7 @@ import {Component, OnInit, Input, OnDestroy} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {Subject, Subscription} from 'rxjs';
 import {ComponentsDataService} from '../services/components-data.service';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'goods-comp',
@@ -10,20 +11,21 @@ import {ComponentsDataService} from '../services/components-data.service';
   providers: [DataService]
 })
 export class GoodsComponent implements OnInit, OnDestroy {
+  private componentDestroyed$ = new Subject();
   sideMenuVisibility;
   page: number;
   dataList;
-  subscription: Subscription;
   modalVisibility;
 
   constructor(private http: DataService, private componentDS: ComponentsDataService) {
   }
 
   ngOnInit(): void {
-    this.componentDS.subject.subscribe(toggle => this.sideMenuVisibility = toggle);
+    this.componentDS.subject.pipe(takeUntil(this.componentDestroyed$)).subscribe(toggle => this.sideMenuVisibility = toggle);
 
-    this.componentDS.dataComp$.subscribe(data => this.dataList = data);
-    this.subscription = this.http.data$.subscribe(data => {
+    this.componentDS.dataComp$.pipe(takeUntil(this.componentDestroyed$)).subscribe(data => this.dataList = data);
+
+    this.http.data$.pipe(takeUntil(this.componentDestroyed$)).subscribe(data => {
       this.dataList = data;
       this.dataList.forEach((item) => {
         item.checked = false;
@@ -32,7 +34,8 @@ export class GoodsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.componentDestroyed$.next();
+    this.componentDestroyed$.complete();
   }
 
   modalToggle(): void {

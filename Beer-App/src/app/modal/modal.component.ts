@@ -1,8 +1,9 @@
 import {Component, OnDestroy, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {Note} from '../Note';
-import {Subscription} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {ComponentsDataService} from '../services/components-data.service';
 import {DataService} from '../services/data.service';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'modal',
@@ -15,19 +16,20 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Output() onChanged = new EventEmitter<boolean>();
 
   dataList;
-  subscription: Subscription;
+  componentDestroyed$ = new Subject();
 
   constructor(private componentDS: ComponentsDataService) {
   }
 
   ngOnInit(): void {
-    this.subscription = this.componentDS.dataComp$.subscribe(data => {
+    this.componentDS.dataComp$.pipe(takeUntil(this.componentDestroyed$)).subscribe(data => {
       this.dataList = data;
     });
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.componentDestroyed$.next();
+    this.componentDestroyed$.complete();
   }
 
   getData() {

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, Validators, FormGroup} from '@angular/forms';
 import {ComponentsDataService} from '../services/components-data.service';
 import {DataService} from '../services/data.service';
@@ -8,7 +8,7 @@ import {DataService} from '../services/data.service';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent{
+export class AuthComponent {
   addUserForm: FormGroup;
   sideMenuVisibility;
 
@@ -24,7 +24,7 @@ export class AuthComponent{
   }
 
   checkAuthFields(): void {
-    if (this.addUserForm.controls['userName'].invalid && this.addUserForm.controls['userPassword']){
+    if (this.addUserForm.controls['userName'].invalid && this.addUserForm.controls['userPassword']) {
       alert('Ошибка');
     } else {
       alert('OK');

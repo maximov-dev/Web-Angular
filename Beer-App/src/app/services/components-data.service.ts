@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
-import {BehaviorSubject} from 'rxjs';
+import {take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class ComponentsDataService {
   }
 
   getData() {
-    this.dataComp$.subscribe(data => this.dataList = data);
+    this.dataComp$.pipe(take(1)).subscribe(data => this.dataList = data);
   }
 
   ToggleVisibility() {

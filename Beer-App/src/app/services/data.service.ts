@@ -11,6 +11,6 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   getData(): void {
-  this.http.get(`https://api.punkapi.com/v2/beers?per_page=8&page=${this.page}`).pipe(take(1)).subscribe(data => this.data$.next(data));
+  this.http.get(`https://api.punkapi.com/v2/beers?per_page=8&page=${this.page}`).subscribe(data => this.data$.next(data));
   }
 }
